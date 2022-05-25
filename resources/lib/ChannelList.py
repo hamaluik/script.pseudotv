@@ -22,9 +22,10 @@ import time, threading
 import datetime
 import sys, re
 import random
+import importlib
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+importlib.reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 from xml.dom.minidom import parse, parseString
 
@@ -195,7 +196,7 @@ class ChannelList:
 
     def sendJSON(self, command):
         data = xbmc.executeJSONRPC(command)
-        return unicode(data, 'utf-8', errors='ignore')
+        return str(data)
 
 
     def setupChannel(self, channel, background = False, makenewlist = False, append = False):

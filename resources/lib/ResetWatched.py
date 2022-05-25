@@ -74,7 +74,7 @@ class ResetWatched:
 
     def sendJSON(self, command):
         data = xbmc.executeJSONRPC(command)
-        return unicode(data, 'utf-8', errors='ignore')
+        return str(data, 'utf-8', errors='ignore')
 
     def load(self,filename,watchedList,channel):
         self.log("RESET CHANNEL " + filename)

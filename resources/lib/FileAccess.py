@@ -178,7 +178,7 @@ class VFSFile:
 
 
     def write(self, data):
-        if isinstance(data, unicode):
+        if isinstance(data, str):
             data = bytearray(data, "utf-8")
             data = bytes(data)
 

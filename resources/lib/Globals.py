@@ -24,18 +24,18 @@ from FileAccess import FileLock
 
 def debug(msg, *args):
     try:
-        txt=u''
-        msg=unicode(msg)
+        txt=''
+        msg=str(msg)
         for arg in args:
             if type(arg) == int:
-                arg = unicode(arg)
+                arg = str(arg)
             if type(arg) == list:
-                arg = unicode(arg)
-            txt = txt + u"/" + arg
-        if txt == u'':
-            xbmc.log(u"PSTV: {0}".format(msg).encode('ascii','xmlcharrefreplace'), xbmc.LOGDEBUG)
+                arg = str(arg)
+            txt = txt + "/" + arg
+        if txt == '':
+            xbmc.log("PSTV: {0}".format(msg).encode('ascii','xmlcharrefreplace'), xbmc.LOGDEBUG)
         else:
-            xbmc.log(u"PSTV: {0}#{1}#".format(msg, txt).encode('ascii','xmlcharrefreplace'), xbmc.LOGDEBUG)
+            xbmc.log("PSTV: {0}#{1}#".format(msg, txt).encode('ascii','xmlcharrefreplace'), xbmc.LOGDEBUG)
     except:
         print ("PSTV: Error in Debugoutput")
         print (msg)
@@ -45,7 +45,7 @@ ADDON = xbmcaddon.Addon(id='script.pseudotv')
 ADDON_ID = ADDON.getAddonInfo('id')
 ADDON_NAME = ADDON.getAddonInfo('name')
 LANGUAGE = ADDON.getLocalizedString
-CWD = ADDON.getAddonInfo('path').decode("utf-8")
+CWD = ADDON.getAddonInfo('path')
 VERSION = ADDON.getAddonInfo('version')
 ICON = ADDON.getAddonInfo('icon')
 
@@ -56,16 +56,22 @@ def log(msg, level = xbmc.LOGDEBUG):
         pass
 
 
-def uni(string, encoding = 'utf-8'):
-    if isinstance(string, basestring):
-        if not isinstance(string, unicode):
-           string = unicode(string, encoding)
+# def uni(string, encoding = 'utf-8'):
+    # if isinstance(string, str):
+        # if not isinstance(string, str):
+           # string = str(string, encoding)
+
+    # return string
+def uni(string):
+    if isinstance(string, str):
+        if not isinstance(string, str):
+           string = str(string)
 
     return string
 
 def ascii(string):
-    if isinstance(string, basestring):
-        if isinstance(string, unicode):
+    if isinstance(string, str):
+        if isinstance(string, str):
            string = string.encode('ascii', 'ignore')
 
     return string
@@ -84,7 +90,7 @@ MODE_RANDOM = 8
 MODE_REALTIME = 16
 MODE_STARTMODES = MODE_RANDOM | MODE_REALTIME | MODE_RESUME
 
-SETTINGS_LOC = ADDON.getAddonInfo('profile').decode("utf-8")
+SETTINGS_LOC = ADDON.getAddonInfo('profile')
 CHANNEL_SHARING = False
 LOCK_LOC = xbmc.translatePath(os.path.join(SETTINGS_LOC, 'cache' + '/'))
 
